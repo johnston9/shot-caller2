@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!--top-box with red "Shot Caller" sides decoration-->
+<div class="row">
+   <div class="col s1 offset-s1 m1 offset-m3">
+      <div class="long-boxl">
+         <p>S<br>H<br>O<br>T</p>
+      </div>
+   </div>
+   <div class="col s6 offset-s1 m4">
+      <div class="login-box">
+         <div class="row">
+            <div class="col s1 left-pad">
+               <div class="smallPanel-l"></div>
+            </div>
+            <div class="col s11">
+               <p class="username shadow-light1 center-align"><strong>Images</strong></p>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="col s1 offset-s1 m1">
+      <div class="long-box right">
+         <p>C<br>A<br>L<br>L<br>E<br>R</p>
+      </div>
+   </div>
+</div>
+
+<!--panel-left-->
+<div class="row">
+   <div class="col s1">
+      <div class="panel-left"></div>
+   </div>
+   <div class="col s10">
+
+        <!--find all images-->
+      <div class="row">
+         <div class="col s12 m6 offset-m3 center-align">
+            <p class="btn-small pad-20 blueBack-sea center-align find">
+               <a class="white-text " href="{{ url_for('all_images') }}">
+               <strong>All Images</strong>  
+               </a>
+            </p>
+         </div>
+      </div>
+
+      <!--instructions-->
+      <div class="row">
+         <div class="col s12 m8 offset-m2 center-align margintop-20">
+            <p class="offwhite">Enter image reference tag, e.g. nickApartment1 to get specific image
+               or key word, e.g., nick, to get all related images.
+            </p>
+         </div>
+      </div>
+
+      <!--form-->
+      <div class="row">
+         <div class="col s12 m8 offset-m2">
+            <div class="card-panel matt-black">
+               <form class="" method="POST" action="{{ url_for('get_image') }}">
+                  <div class="row">
+                     <div class="col s12">
+                        <div class="input-field">
+                           <i class="fas fa-fas fa-calendar-alt prefix light-blue-text text-darken-4"></i>
+                           <input id="image" name="image" type="text" class="validate offwhite" minlength="3" required>
+                           <label for="image">Enter reference tag or key words</label>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col s12">
+                        <button type="submit" class="btn-small light-blue darken-4 text-shadow">
+                        Search
+                        </button>
+                        <a href="{{ url_for('get_image') }}"
+                           class="box btn-small light-blue darken-4 text-shadow right">Reset</a>
+                     </div>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
+
+      <!--images-->
+      {% if images |length > 0 %}
+      <div class="row">
+         <div class="col s12 m8 offset-m2">
+            <div class="pic">
+               {% for im in images %}  
+               <img class="margintop-20" src=" {{ im.image_src }} " onerror="this.onerror=null; this['aria-label']='Available Soon'; this.src=`{{ url_for('static', filename='css/images/im-er3.png') }}`; " alt="{{ im.image_name }}"> 
+               <h5 class="center-align antiquewhite image_des"> {{ im.image_des }} </h5>
+               <!---admin section (only display if sesson user is admin)-->
+               {% if session.user|lower == "admin"|lower %}
+               <a href="{{ url_for('edit_image', image_id=im._id) }}"
+                  class="btn-small blueBack-sea pad-20">
+               Edit</a>
+               <button data-target="modal{{ loop.index }}"
+                  class=" right blueBack-sea btn modal-trigger">Delete</button>
+               <!-- Modal Structure -->
+               <div id="modal{{ loop.index }}" class="modal">
+                  <div class="modal-content">
+                     <h3 class="center-align crimson"><strong>Confirm Delete Image</strong></h3>
+                  </div>
+                  <div class="modal-footer">
+                     <a href="{{ url_for('delete_image', image_id=im._id) }}"
+                        class="pad-50 modal-close left btn-small blueBack-sea">OK</a>
+                     <a href="#" class="pad-50 modal-close btn-small blueBack-sea">No</a>
+                  </div>
+               </div>
+               {% endif %}
+               <hr class="red-line margintop-30 ">
+               {% endfor %}
+            </div>
+         </div>
+      </div>
+      {% else %}
+      <h3 class="offwhite matt-black center-align">No Images Found</h3>
+      {% endif %}
+   </div>
+   
+   <!--panel-right-->
+   <div class="col s1">
+      <div class="panel-right"></div>
+   </div>
+</div>
+{% endblock %}

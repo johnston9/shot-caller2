@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <!--top-box with red "Shot Caller" sides decoration-->
+    <div class="row">
+    <div class="col s1 offset-s1 m1 offset-m3">
+        <div class="long-boxl">
+            <p>S<br>H<br>O<br>T</p>
+        </div>
+    </div>
+    <div class="col s6 offset-s1 m4">
+        <div class="login-box">
+            <div class="row">
+                <div class="col s1 left-pad">
+                <div class="smallPanel-l"></div>
+                </div>
+                <div class="col s11">
+                <p class="username shadow-light1 center-align"><strong>Departments</strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col s1 offset-s1 m1">
+        <div class="long-box right">
+            <p>C<br>A<br>L<br>L<br>E<br>R</p>
+        </div>
+    </div>
+    </div>
+    <!--panel-left-->
+    <div class="row">
+    <div class="col s1">
+        <div class="panel-left"></div>
+    </div>
+    <div class="col s10">
+        <div class="row margintop-50">
+            <div class="col s12 m8 offset-m2">
+                <div class="row">
+                {% for dept in depts %}
+                <div class="col s4 center-align">
+                    <div class="image-box">
+                        <a href="{{ url_for('get_dep', dep=dept.dept_name) }}">
+                            <img width="250" height="166"  class="dep-img" src="{{ dept.dept_url }}" alt="{{ dept.dept_name }}">                    
+                            <p class="center-align offwhite">{{ dept.dept_title }}</p>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col s1">
+        <div class="panel-right"></div>
+    </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <!--top-box with red "Shot Caller" sides decoration-->
+    <div class="row">
+    <div class="col s1 offset-s1 m1 offset-m3">
+        <div class="long-boxl">
+            <p>S<br>H<br>O<br>T</p>
+        </div>
+    </div>
+    <div class="col s6 offset-s1 m4">
+        <div class="login-box">
+            <div class="row">
+                <div class="col s1 left-pad">
+                <div class="smallPanel-l"></div>
+                </div>
+                <div class="col s11">
+                <p class="username shadow-light1 center-align"><strong>New Message</strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col s1 offset-s1 m1">
+        <div class="long-box right">
+            <p>C<br>A<br>L<br>L<br>E<br>R</p>
+        </div>
+    </div>
+    </div>
+    <!--panel-left-->
+    <div class="row">
+    <div class="col s1">
+        <div class="panel-left"></div>
+    </div>
+    <div class="col s10">
+        <h5 class="white-text center-align">Enter Message</h5>
+        <p class="antiquewhite center-align">If adding an Image SRC the Image Name box below it is required. <br>
+            Please click the Check Image button before submitting message
+            to ensure the image URL is correct.</p>
+        <!--add message form-->
+        <div class="row">
+            <form id="image_form" class="card-panel matt-black offwhite col s12 m10 offset-m1" method="POST" action="{{ url_for('add_message') }}">
+                <!--select department-->
+                <div class="row margintop-20">
+                <div class="input-field col s12 m10 offset-m1">
+                    <i class="fas fa-minus prefix blue-sky"></i>
+                    <select id="department_name" name="department_name" class="validate" required>
+                        <option value="" disabled selected></option>
+                        {% for dep in depts %}
+                        <option value="{{ dep.dept_name }}">{{ dep.dept_name }}</option>
+                        {% endfor %}
+                    </select>
+                    <label for="department_name">Select Department</label>
+                </div>
+                </div>
+                <!--enter subject-->
+                <div class="row">
+                <div class="input-field col s12 m10 offset-m1">
+                    <i class="fas fa-minus fa-xs prefix blue-sea"></i>
+                    <input id="subject" name="subject" minlength="1" maxlength="50"
+                        type="text" class="validate" style="color:whitesmoke !important;" required>
+                    <label for="subject">Subject</label>
+                </div>
+                </div>
+                <!--enter message-->
+                <div class="row">
+                <div class="input-field col s12 m10 offset-m1">
+                    <i class="fas fa-minus prefix blue-sky"></i>
+                    <textarea id="message" name="message" minlength="5"
+                        maxlength="300" class="materialize-textarea validate" style="color:whitesmoke !important;" required></textarea>
+                    <label for="message">Message</label>
+                </div>
+                </div>
+                <!--enter image src-->
+                <div class="row">
+                <div class="input-field col s12 m10 offset-m1">
+                    <i class="fas fa-minus prefix blue-sea"></i>
+                    <input id="image_src" name="image_src"
+                        type="text" class="validate" style="color:whitesmoke !important;">
+                    <label for="image_src">Image SRC </label>
+                </div>
+                </div>
+                <!--enter image Name-->
+                <div class="row">
+                <div class="input-field col s12 m10 offset-m1">
+                    <i class="fas fa-minus prefix blue-sky"></i>
+                    <input id="image_name" name="image_name" minlength="1"
+                        type="text" class="validate" style="color:whitesmoke !important;">        
+                    <label for="image_name">Image Name  </label>
+                </div>
+                </div>
+                <!--is priority switch-->
+                <div class="row">
+                <div class="input-field col s12 m10 offset-m1">
+                    <div class="switch">
+                        <i class="fas fa-minus prefix blue-sea"></i>
+                        <label for="is_priority">
+                        <input type="checkbox" id="is_priority" name="is_priority">
+                        Is Priority
+                        <span class="lever"></span>
+                        </label>
+                    </div>
+                </div>
+                </div>
+                <!--Check Image-->
+                    <div class="row margintop-20 ">
+                        <div class="center-align">
+                            <div onclick="check_image()" class="pad-20 white-text blueBack-sea btn-small text-shadow">
+                            <strong>Check Image</strong> 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                    <div class="col s12 m6 margintop-20 center-align">
+                    <!-- cancel button -->
+                        <a href="{{ url_for('user_home', username=session['user']) }}"
+                            class="pad-50 btn-small white-text blueBack-sea">
+                            <strong>Cancel </strong>
+                        </a>
+                    </div>
+                    <div class="col s12 m6 margintop-20 center-align">
+                        <!-- submit button -->
+                        <button type="submit" class=" pad-50 btn-small white-text blueBack-sea">
+                            <strong>Submit </strong>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!--instructions-->
+        <div class="row">
+            <div class="col s12 m10 offset-m1">
+                <p class="find antiquewhite center-align">To upload an image simply first upload and create an url for it with
+                <span><a rel="noopener" class="link-color" href="https://cloudinary.com/" target="_blank">Cloudinary</a></span>
+                or a similar url generating site and enter it in the image SRC input box above. Please 
+                also enter an image name. This is a required field if an SRC has been entered.
+                </p>
+            </div>
+        </div>
+    </div>
+    <!--panel right-->
+    <div class="col s1">
+        <div class="panel-right"></div>
+    </div>
+    </div>
+
+{% endblock %}

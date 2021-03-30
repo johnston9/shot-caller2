@@ -1,0 +1,515 @@
+/*--------------------------general ------------------------*/
+
+.row {
+	margin-bottom: 0px;
+}
+
+hr.red-line {
+	width: 70%;
+	height: 1px;
+	border-width: 0;
+	width: 70%;
+	background-color: crimson;
+	color: crimson;
+}
+
+.mar-bot {
+    margin-bottom: 10px;
+}
+
+.mar-bot20 {
+    margin-bottom: 20px;
+}
+
+
+.margin-top {
+	margin-top: 40px;
+}
+
+.margintop-100 {
+	margin-top: 100px;
+}
+
+.margintop-50 {
+	margin-top: 50px;
+}
+
+.margintop-30 {
+	margin-top: 30px;
+}
+
+.margintop-20 {
+	margin-top: 20px;
+}
+
+.margintop-10 {
+	margin-top: 10px;
+}
+
+.mar-10 {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.no-mar {
+	margin-bottom: 0;
+}
+
+.pad-10 {
+    padding: 10px;
+}
+
+.pad-20 {
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.pad-22 {
+	padding-left: 22px;
+	padding-right: 22px;
+}
+
+.pad-25 {
+	padding-left: 25px;
+	padding-right: 25px;
+}
+
+.pad-30 {
+	padding-left: 30px;
+	padding-right: 30px;
+}
+
+.pad-32 {
+	padding-left: 32px;
+	padding-right: 32px;
+}
+
+.pad-35 {
+	padding-left: 35px;
+	padding-right: 35px;
+}
+
+.pad-50 {
+	padding-left: 50px;
+	padding-right: 50px;
+}
+
+.no-padRight {
+	padding-right: 0 !important;
+}
+
+.no-padLeft {
+	padding-left: 0 !important;
+}
+
+.left-pad {
+	padding: 0px 0px 0px 10px !important;
+}
+
+.right-pad {
+	padding: 0px 10px 0px 0px !important;
+}
+
+.pad-findl {
+	padding: 5px 10px 5px 5px;
+}
+
+.pad-findm {
+	padding: 5px 5px 5px 5px;
+}
+
+.pad-findr {
+	padding: 5px 5px 5px 0px;
+}
+
+.pad-findrd {
+	padding: 5px 5px 5px 10px;
+}
+
+.username {
+	font-size: 36px;
+}
+
+.latest {
+    font-size: 26px;
+}
+.card-250 {
+	height: 110px;
+}
+
+.btn-small {
+	margin: 5px;
+}
+
+.bor-bot {
+   border-bottom: 2px solid white; 
+}
+
+
+/*---------------return to top button----------------------*/
+
+#topbut {
+	display: none;
+	position: fixed;
+	bottom: 20px;
+	right: 50px;
+	z-index: 99;
+	height: 24px;
+	width: 80px;
+	background-color: #1b23da;
+	border: none;
+	font-weight: bold;
+	border-radius: 5px;
+	outline: none;
+	color: #ffffff;
+	cursor: pointer;
+	font-size: 18px;
+}
+
+#topbut:hover {
+	background-color: crimson;
+}
+
+/*-----------------sidenav ----------------------*/
+.sidenav li>a {
+    color: #fafafa;
+}
+
+/*--------------container boxes---========-------*/
+
+.card-panel {
+	margin-top: 20px;
+}
+
+.top-box {
+	background-color: #3b444b;
+	margin-bottom: 15px;
+}
+
+.findDep-box {
+	background-color: #0e1111;
+	margin-bottom: 15px;
+}
+
+.long-boxl {
+    color: rgb(255, 6, 6);
+    margin-top: 80px;
+}
+
+.long-box {
+	color: rgb(255, 6, 6);
+    margin-top: 50px;
+}
+
+.long-boxl p {
+    font-weight: 700;
+}
+
+.long-box p {
+    font-weight: 700;
+}
+
+.login-box {
+	background-color: #3b444b;
+	margin-bottom: 15px;
+	margin-top: 40px;
+	color: #F5F5F5;
+	padding: 14px 10px 10px 10px;
+}
+
+/*---------image panels----------*/
+
+.panel-left {
+	height: 300px;
+	width: 50px;
+	margin-top: 30px;
+	background-image: url("./images/door66l.png");
+	background-size: cover;
+	background-repeat: no-repeat;
+	margin: 0 auto;
+}
+
+.panel-right {
+	height: 300px;
+	width: 50px;
+	margin-top: 30px;
+	background-image: url("./images/door66.png");
+	background-size: cover;
+	background-position: right top;
+	background-repeat: no-repeat;
+	margin: 0 auto;
+}
+
+.smallPanel-l {
+	background-image: url("./images/door66l.png");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: right top;
+	height: 120px;
+}
+
+/*---------------------colours----------------------------*/
+
+.shadow-light {
+	text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6);
+}
+
+.shadow-light1 {
+	text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.6);
+}
+
+.link-color1 {
+	color: rgb(143, 212, 241);
+}
+
+.link-color {
+	color: rgb(170 231 255);
+}
+
+.antiquewhite {
+	color: antiquewhite;
+}
+
+.blue-sea-dark {
+    color: #0077a7;
+}
+
+.blue-sea {
+	color: #0087BE;
+}
+
+.blueBack-sea {
+	background-color: #0077a7;
+}
+
+.blue-sky {
+	color: #1AA6E4;
+}
+
+.aqua {
+	background-color: aquamarine;
+}
+
+.greentext {
+	color: #26a69a;
+}
+
+.crimson {
+	color: crimson;
+}
+
+.crimson-back {
+	background-color: crimson;
+}
+
+.matt-black {
+	background-color: #3b444b;
+}
+
+.border-red {
+	border-left: 3px solid crimson;
+}
+
+.textmatt-black {
+	color: #2e5b7e;
+}
+
+.white-back {
+	background-color: #F5F5F5;
+}
+
+.body-back {
+	background-color: #353839;
+}
+
+.offwhite {
+	color: #F5F5F5;
+}
+
+
+/*--------------------register/login pages-----------------------*/
+
+.input-field {
+	position: relative;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+.login-form {
+	background-color: #3b444b;
+	padding: 0px 24px 10px 24px;
+}
+
+.or-login a:hover {
+	color: aquamarine;
+}
+
+
+/*---------user base page----------*/
+
+.dep-img {
+	width: 250px;
+	height: 166px;
+}
+
+/*---------------dep page-----------*/
+
+.collapsible-border {
+	border-color: #0087BE;
+}
+
+.collapsible {
+	margin: 0;
+}
+
+.collapsible-body .pic img {
+	width: 300px;
+	height: auto;
+}
+
+.dep-title {
+	padding: 10px;
+}
+
+.find a:hover {
+	color: crimson;
+}
+
+.message-pic {
+	border-top: 2px solid crimson;
+	padding-top: 10px;
+}
+
+.message-pic img {
+	width: 100%;
+	height: auto;
+}
+
+span.span-mes {
+	color: #1AA6E4;
+}
+
+span.caps {
+	text-transform: capitalize;
+}
+
+/*----------add message/edit message-------------*/
+
+.select-wrapper input.select-dropdown {
+	color: antiquewhite;
+}
+
+.select-dropdown li.disabled,
+.select-dropdown li.disabled>span,
+.select-dropdown li.optgroup {
+	color: blue;
+	background-color: transparent;
+}
+
+.input-field .prefix~label {
+	color: rgb(170 231 255);
+    margin-left: 3rem;
+}
+
+.input-field>label {
+    color: rgb(170 231 255);
+}
+
+/*----------------images page------------------------*/
+
+img{
+  color: #BADA55;
+  font-weight: bolder;
+  font-size: 16px ;  
+}
+
+h5.image_des {
+  font-weight: bolder;
+  font-size: 20px ; 
+  text-transform: uppercase;  
+}
+
+#explain {
+	padding: 2px 20px 2px 20px;
+}
+
+.pic img {
+	width: 100%;
+	height: auto;
+}
+
+.pic {
+	border-top: 2px solid crimson;
+    padding-top: 10px;
+}
+
+/*------------------media queries-------------------*/
+
+@media only screen and (max-width: 600px) {
+	.smallPanel-l {
+		background-image: url(./images/door66l.png);
+		height: 70px;
+	}
+	.long-boxl p {
+		font-size: 10px !important;
+	}
+	.long-box p {
+		font-size: 10px !important;
+    }
+    #pass-type {
+        font-size: 10px;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+	.username {
+		font-size: 30px;
+	}
+	.panel-left {
+		height: 300px;
+		background-position: right top;
+		width: 100%;
+	}
+	.panel-right {
+		height: 300px;
+		background-position: left top;
+		width: 100%;
+	}
+}
+
+@media only screen and (max-width: 400px) {
+    .username {
+    font-size: 22px;
+    }
+}
+
+/*--------------------department images-----------------*/
+
+@media only screen and (max-width: 1500px) {
+	.dep-img {
+		width: 200px;
+		height: 133px;
+	}
+}
+
+@media only screen and (max-width: 1200px) {
+	.dep-img {
+		width: 150px;
+		height: 100px;
+	}
+}
+
+@media only screen and (max-width: 800px) {
+	.dep-img {
+		width: 100px;
+		height: 66px;
+	}
+}
+
+@media only screen and (max-width: 600px) {
+	.dep-img {
+		width: 50px;
+		height: 50px;
+		border-radius: 25px;
+	}
+}

@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <!--top-box with red "Shot Caller" sides decoration-->
+    <div class="row">
+    <div class="col s1 offset-s1 m1 offset-m3">
+        <div class="long-boxl">
+            <p>S<br>H<br>O<br>T</p>
+        </div>
+    </div>
+    <div class="col s6 offset-s1 m4">
+        <div class="login-box">
+            <div class="row">
+                <div class="col s1 left-pad">
+                <div class="smallPanel-l"></div>
+                </div>
+                <div class="col s11">
+                <p class="username shadow-light1 center-align"><strong>Add New Image</strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col s1 offset-s1 m1">
+        <div class="long-box right">
+            <p>C<br>A<br>L<br>L<br>E<br>R</p>
+        </div>
+    </div>
+    </div>
+    <!--panel-left-->
+    <div class="row">
+    <div class="col s1">
+        <div class="panel-left"></div>
+    </div>
+
+        <div class="col s10">
+            <p class=" center-align antiquewhite">Please click the Check Image button before submiting.</p>
+            <!--add image form-->
+            <div class="row top-2">
+                <form id="image_form" class="card-panel matt-black offwhite col s12 m10 offset-m1" method="POST"
+                    action="{{ url_for('add_image') }}">
+                    <!--enter image_name-->
+                    <div class="row">
+                        <div class="input-field col s12 m10 offset-m1">
+                            <i class="fas fa-minus prefix blue-text text-darken-4"></i>
+                            <input id="image_name" name="image_name" minlength="1" type="text" class="validate"
+                                style="color:whitesmoke !important;" required>
+                            <label for="image_name">Image Name Ref Tag</label>
+                        </div>
+                    </div>
+                    <!--enter image description-->
+                    <div class="row">
+                        <div class="input-field col s12 m10 offset-m1">
+                            <i class="fas fa-minus prefix blue-text text-darken-4"></i>
+                            <input id="image_des" name="image_des" minlength="1" type="text" class="validate"
+                                style="color:whitesmoke !important;" required>
+                            <label for="image_des">Image Description</label>
+                        </div>
+                    </div>
+                    <!--enter image src-->
+                    <div class="row">
+                        <div class="input-field col s12 m10 offset-m1">
+                            <i class="fas fa-minus prefix blue-text text-darken-4"></i>
+                            <input id="image_src" name="image_src" minlength="10" type="text" class="validate"
+                                style="color:whitesmoke !important;" value="" required>
+                            <label for="image_src">Image SRC</label>
+                        </div>
+                    </div>
+                    <!--Check Image-->
+                    <div class="row">
+                        <div class="center-align">
+                            <div onclick="check_image()" class="pad-20 btn-small white-text blueBack-sea">
+                               <strong>Check Image</strong>
+                            </div>
+                        </div>
+                    </div>
+                     
+                    <!--submit-->
+                    <div class="row">
+                        <div class="center-align">
+                            <button type="submit" class="pad-30 btn-small white-text blueBack-sea">
+                                <strong>Add Image</strong>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!--instructions-->
+            <div class="row">
+                <div class="col s12 m10 offset-m1">
+                    <p class="find antiquewhite center-align">
+                        In the "Image Name Ref Tag" box enter an image reference tag, e.g., 
+                        "nickApartment1" so the image can be found by specific reference.
+                        In the "Image Description box enter an image description so the image
+                        can be found by search query words, e.g., "Nick's
+                        apartment".<br>
+                        In the "Image SRC" box enter a URL for the for where the image is stored.
+                        To get a URL for an image simply upload the image and create an URL for it with
+                        <span><a rel="noopener" class="link-color" href="https://cloudinary.com/" target="_blank">Cloudinary</a></span>
+                        or a similar url generating site.
+                        Alternatively if you wish to use an image already uploaded by a user in department
+                        messages right click on the image and copy it then paste it in the box.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <!--panel right-->
+        <div class="col s1">
+        <div class="panel-right"></div>
+        </div>
+    </div>
+
+{% endblock %}
