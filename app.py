@@ -491,11 +491,37 @@ def edit_message(message_id, depart, user):
             "edit_message.html", message=message, depts=depts)
 
 
+@app.route("/guestedit_image/<image_id>", methods=["GET", "POST"])
+def guestedit_image(image_id):
+    """Guest admin Render the Edit Image page and allow admin to edit an image.
+
+    On Get checks if admin is sesson user then renders the Edit Image page
+    with the selected image's detail as values in the input boxes.
+    On Post displays a message.
+
+    :param image_id: the selected document to be edited
+    :type dep: str
+    :return: edit_image.html
+    :rtype: n/a
+    """
+
+    if session["user"] == "admin":
+        if request.method == "POST":
+            flash("Display purposes only")
+            # Render the Images page
+            return redirect(url_for("get_image"))
+
+        # get selected document in images collection in Mongo
+        image = mongo.db.images.find_one({"_id": ObjectId(image_id)})
+        # Render the Edit Images page
+        return render_template("edit_image.html", image=image)
+
+
 @app.route("/edit_image/<image_id>", methods=["GET", "POST"])
 def edit_image(image_id):
     """Render the Edit Image page and allow admin to edit an image.
 
-    On Get checks if admin is sesson user then renders the Edit Image page
+    On Get checks if admin2 is sesson user then renders the Edit Image page
     with the selected image's detail as values in the input boxes.
     On Post creates a dictionary using values from the form
     to update the selected document in Mongo.
@@ -506,7 +532,7 @@ def edit_image(image_id):
     :rtype: n/a
     """
 
-    if session["user"] == "admin":
+    if session["user"] == "admin2":
         if request.method == "POST":
             edit = {
                 "image_name": request.form.get("image_name"),
@@ -523,6 +549,31 @@ def edit_image(image_id):
         image = mongo.db.images.find_one({"_id": ObjectId(image_id)})
         # Render the Edit Images page
         return render_template("edit_image.html", image=image)
+
+
+@app.route("/guestdelete_message/<message_id>/<depart>/<user>")
+def guestdelete_message(message_id, depart, user):
+    """Guest admin Delete a Message.
+
+    Checks if the message poster's username is equal to the sesson user
+    or if admin is user and if either is true displays a model asking
+    the user to confirm delete.
+    If the user confirms the document is deleted in Mongo.
+
+    :param message_id: the selected document to be edited
+    :type dep: str
+    :param depart: the collection which the document is in
+    :type dep: str
+    :param user: the user's username
+    :type dep: str
+    :return: edit_message.html
+    :rtype: n/a
+    """
+
+    if session["user"] == user or session["user"] == "admin":
+        flash("Display purposes only")
+        # Render the Department page
+        return redirect(url_for("get_dep", dep=depart))
 
 
 @app.route("/delete_message/<message_id>/<depart>/<user>")
@@ -544,7 +595,7 @@ def delete_message(message_id, depart, user):
     :rtype: n/a
     """
 
-    if session["user"] == user or session["user"] == "admin":
+    if session["user"] == user or session["user"] == "admin2":
         # remove selected document from selected department collection in Mongo
         mongo.db[depart].remove({"_id": ObjectId(message_id)})
         flash("Message Deleted")
@@ -552,11 +603,37 @@ def delete_message(message_id, depart, user):
         return redirect(url_for("get_dep", dep=depart))
 
 
+@app.route("/guestadd_script/<script_id>", methods=["GET", "POST"])
+def guestadd_script(script_id):
+    """Guest admin Update the script URL.
+
+    On Get checks if admin is user and if true renders the Add Script page
+    with the current script URL as a value in the input box.
+    On Post displays a flash message.
+
+    :param script_id: the selected document to be updated
+    :type dep: str
+    :return: add_script.html
+    :rtype: n/a
+    """
+
+    if session["user"] == "admin":
+        # get the one document from latest_script collection in Mongo
+        script = list(mongo.db.latest_script.find())
+        if request.method == "POST":
+            flash("Display purposes only")
+            # Render the User Home page
+            return redirect(url_for("user_home", username=session["user"]))
+
+        # Render the Add Script page
+        return render_template("add_script.html", script=script)
+
+
 @app.route("/add_script/<script_id>", methods=["GET", "POST"])
 def add_script(script_id):
     """Update the script URL.
 
-    On Get checks if admin is user and if true renders the Add Script page
+    On Get checks if admin2 is user and if true renders the Add Script page
     with the current script URL as a value in the input box.
     On Post the document is updated in Mongo.
 
@@ -566,7 +643,7 @@ def add_script(script_id):
     :rtype: n/a
     """
 
-    if session["user"] == "admin":
+    if session["user"] == "admin2":
         # get the one document from latest_script collection in Mongo
         script = list(mongo.db.latest_script.find())
         if request.method == "POST":
@@ -585,21 +662,41 @@ def add_script(script_id):
         return render_template("add_script.html", script=script)
 
 
-@app.route("/add_shot", methods=["GET", "POST"])
-def add_shot():
-    """Update the script URL.
+@app.route("/guestadd_shot", methods=["GET", "POST"])
+def guestadd_shot():
+    """Guest admin Update the shotlist URL.
 
-    On Get checks if admin is user and if true renders the Add Script page
-    with the current script URL as a value in the input box.
-    On Post the document is updated in Mongo.
+    On Get checks if admin is user and if true renders the Add Shotlist page
+    with the current shotlist URL as a value in the input box.
+    On Post the user gets a flash message
 
-    :param script_id: the selected document to be updated
-    :type dep: str
-    :return: edit_message.html
+    :return: add_shotlist.html
     :rtype: n/a
     """
 
     if session["user"] == "admin":
+        if request.method == "POST":
+            flash("Display purposes only")
+            # Render the User Home page
+            return redirect(url_for("user_home", username=session["user"]))
+
+        # Render the Add Shotlist page
+        return render_template("add_shotlist.html")
+
+
+@app.route("/add_shot", methods=["GET", "POST"])
+def add_shot():
+    """Update the shotlist URL.
+
+    On Get checks if admin is user and if true renders the Add Shotlist page
+    with the current shotlist URL as a value in the input box.
+    On Post the document is updated in Mongo.
+
+    :return: add_shotlist.html
+    :rtype: n/a
+    """
+
+    if session["user"] == "admin2":
         if request.method == "POST":
             newshot = {
                 "shotlist": request.form.get("shot_name")
@@ -615,17 +712,36 @@ def add_shot():
         return render_template("add_shotlist.html")
 
 
+@app.route("/guestadd_image", methods=["GET", "POST"])
+def guestadd_image():
+    """Display for guest admin the add image page.
+
+    On Get checks if admin is user and if true renders the Add Script page
+    with the current script URL as a value in the input box.
+    On Post the user gets a message.
+
+    :return: add_image.html
+    :rtype: n/a
+    """
+
+    if session["user"] == "admin":
+        if request.method == "POST":
+            flash("Display purposes only")
+            # Render the User Home page
+            return redirect(url_for("user_home", username=session["user"]))
+
+        # Render the Add Image page
+        return render_template("add_image.html")
+
+
 @app.route("/add_image", methods=["GET", "POST"])
 def add_image():
     """Update the script URL.
 
-    On Get checks if admin is user and if true renders the Add Script page
-    with the current script URL as a value in the input box.
+    On Get checks if admin is user and if true renders the Add Image page
     On Post the document is updated in Mongo.
 
-    :param script_id: the selected document to be updated
-    :type dep: str
-    :return: edit_message.html
+    :return: add_image.html
     :rtype: n/a
     """
 
@@ -646,21 +762,40 @@ def add_image():
         return render_template("add_image.html")
 
 
-@app.route("/remove_user", methods=["GET", "POST"])
-def remove_user():
-    """Update the script URL.
+@app.route("/guestremove_user", methods=["GET", "POST"])
+def guestremove_user():
+    """Guest admin remove user.
 
-    On Get checks if admin is user and if true renders the Add Script page
-    with the current script URL as a value in the input box.
+    On Get checks if admin is user and if true renders the remove user page
     On Post the document is updated in Mongo.
 
-    :param script_id: the selected document to be updated
-    :type dep: str
-    :return: edit_message.html
+    :return: userbase.html
     :rtype: n/a
     """
 
     if session["user"] == "admin":
+        if request.method == "POST":
+            # remove document from the users collection in Mongo
+            flash("Display purposes only")
+            # Render the User Base page
+            return redirect(url_for("user_home", username=session["user"]))
+
+        # Render the Remove User page
+        return render_template("remove_user.html")
+
+
+@app.route("/remove_user", methods=["GET", "POST"])
+def remove_user():
+    """Remove a user.
+
+    On Get checks if admin is user and if true renders the remove user page
+    On Post the user is removed in Mongo.
+
+    :return: userhome..html
+    :rtype: n/a
+    """
+
+    if session["user"] == "admin2":
         if request.method == "POST":
             # remove document from the users collection in Mongo
             mongo.db.users.remove({"firstname": request.form.get(
@@ -673,21 +808,40 @@ def remove_user():
         return render_template("remove_user.html")
 
 
+@app.route("/guestdelete_image/<image_id>")
+def guestdelete_image(image_id):
+    """ Guest admin Delete an image.
+
+    On Get checks if admin is user and if true displays a modal asking the
+    user to confirm delete.
+    On confirming the user is returned to image page
+
+    :param image_id: the selected document to be deleted
+    :type dep: str
+    :return: images.html
+    :rtype: n/a
+    """
+
+    if session["user"] == "admin":
+        # render Images page
+        return redirect(url_for("get_image"))
+
+
 @app.route("/delete_image/<image_id>")
 def delete_image(image_id):
     """Delete an image.
 
-    On Get checks if admin is user and if true displays a modal asking the
+    On Get checks if admin2 is user and if true displays a modal asking the
     user to confirm delete.
     On confirming the document is deleted in Mongo.
 
     :param image_id: the selected document to be deleted
     :type dep: str
-    :return: user_home.html
+    :return: images.html
     :rtype: n/a
     """
 
-    if session["user"] == "admin":
+    if session["user"] == "admin2":
         # delete document in the images collection in Mongo
         mongo.db.images.delete_one({"_id": ObjectId(image_id)})
         flash("Image Removed")

@@ -32,8 +32,39 @@
         <div class="panel-left"></div>
     </div>
     <div class="col s10">
-        <!---admin section (only display if sesson user is admin)-->
+        <!---admin guest section (only display if sesson user is admin guest)-->
         {% if session.user|lower == "admin"|lower %}
+        <hr class="red-line">
+        <h5 class="center-align antiquewhite">Admin</h5>
+        <div class="row">
+            <!---remove user-->
+            <div class="col s12 m6 margintop-10 center-align find">
+                <a class="btn-small pad-30 offwhite blueBack-sea text-shadow" href="{{ url_for('guestremove_user') }}">
+                <strong>Remove User</strong></a>
+            </div>
+            <!---upload latest script-->
+            <div class="col s12 m6 margintop-10 center-align find">
+                {% for draft in script %}
+                <a class="btn-small pad-25 offwhite blueBack-sea text-shadow" href="{{ url_for('guestadd_script', script_id=draft._id) }}">
+                <strong>Upload Script</strong></a>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="row">
+            <!---upload latest shotlist-->
+            <div class="col s12 m6 center-align margintop-10 find">
+                <a class="btn-small offwhite blueBack-sea text-shadow" href="{{ url_for('guestadd_shot') }}">
+                <strong> Upload Shot List</strong></a>
+            </div>
+            <!---upload new images-->
+            <div class="col s12 m6 center-align margintop-10 find">
+                <a class="btn-small pad-22 offwhite blueBack-sea text-shadow" href="{{ url_for('guestadd_image') }}">
+                <strong> Upload Images</strong></a> 
+            </div>
+        </div>
+        {% endif %} 
+        <!---admin section (only display if sesson user is admin2)-->
+        {% if session.user|lower == "admin2"|lower %}
         <hr class="red-line">
         <h5 class="center-align antiquewhite">Admin</h5>
         <div class="row">
