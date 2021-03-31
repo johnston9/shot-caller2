@@ -91,7 +91,7 @@
                <img class="margintop-20" src=" {{ im.image_src }} " onerror="this.onerror=null; this['aria-label']='Available Soon'; this.src=`{{ url_for('static', filename='css/images/im-er3.png') }}`; " alt="{{ im.image_name }}"> 
                <h5 class="center-align antiquewhite image_des"> {{ im.image_des }} </h5>
                <!---admin section (only display if sesson user is admin)-->
-               {% if session.user|lower == "admin"|lower %}
+               {% if session.user|lower == "admin2"|lower %}
                <a href="{{ url_for('edit_image', image_id=im._id) }}"
                   class="btn-small blueBack-sea pad-20">
                Edit</a>
@@ -104,6 +104,24 @@
                   </div>
                   <div class="modal-footer">
                      <a href="{{ url_for('delete_image', image_id=im._id) }}"
+                        class="pad-50 modal-close left btn-small blueBack-sea">OK</a>
+                     <a href="#" class="pad-50 modal-close btn-small blueBack-sea">No</a>
+                  </div>
+               </div>
+               {% endif %}
+               {% if session.user|lower == "admin2"|lower %}
+               <a href="{{ url_for('guestedit_image', image_id=im._id) }}"
+                  class="btn-small blueBack-sea pad-20">
+               Edit</a>
+               <button data-target="modal{{ loop.index }}"
+                  class=" right blueBack-sea btn modal-trigger">Delete</button>
+               <!-- Modal Structure -->
+               <div id="modal{{ loop.index }}" class="modal">
+                  <div class="modal-content">
+                     <h3 class="center-align crimson"><strong>Confirm Delete Image</strong></h3>
+                  </div>
+                  <div class="modal-footer">
+                     <a href="{{ url_for('guestdelete_image', image_id=im._id) }}"
                         class="pad-50 modal-close left btn-small blueBack-sea">OK</a>
                      <a href="#" class="pad-50 modal-close btn-small blueBack-sea">No</a>
                   </div>

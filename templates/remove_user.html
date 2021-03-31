@@ -32,9 +32,19 @@
         <div class="panel-left"></div>
     </div>
     <div class="col s10">
+        <div class="row">
+            <div class="col s12">
+                <h3 class="center-align offwhite">DISPLAY ONLY</h3>
+                <div class="center-align ">
+                <a href="{{ url_for('user_home', username=session['user']) }}"
+                    class="btn-small text-shadow">
+                <strong>Guest Return </strong></a>
+                </div>
+            </div>
+        </div>
 
         <!--instructions-->
-            <div class="row margintop-100">
+            <div class="row margintop-20">
                 <div class="col s10 offset-s1 m8 offset-m2">
                     <p class="find antiquewhite center-align">To remove a user input user's First name
                         then user's Last Name and hit submit. To find these look on an message they sent
@@ -45,8 +55,7 @@
 
         <div class="row">
             <!--remove user form-->
-            <form class="card-panel matt-black col s10 offset-s1 col m8 offset-m2" method="POST"
-                action="{{ url_for('remove_user') }}">
+            <div class="card-panel matt-black col s10 offset-s1 col m8 offset-m2">
                 <!--first name-->
                 <div class="row">
                 <div class="input-field col s12">
@@ -68,15 +77,15 @@
                 <!--cancel-->
                 <div class="row center-align">
                 <a href="{{ url_for('user_home', username=session['user']) }}"
-                    class="col s4 offset-s2 btn-small text-shadow">
+                    class="btn-small text-shadow">
                 <strong>Cancel </strong>
                 </a>
                 <!--submit-->
-                <button type="submit" class="col s4 btn-small text-shadow">
-                <strong>Submit </strong>
-                </button>
+                <a href="{{ url_for('user_home', username=session['user']) }}"
+                    class="btn-small text-shadow">
+                <strong>Submit </strong></a>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
     <!--panel right-->

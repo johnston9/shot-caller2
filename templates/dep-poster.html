@@ -165,24 +165,6 @@
                         </div>
                     </div>
                     {% endif %}
-                    <!--guest admin edit/delete-->
-                    {% if session.user|lower == "admin|lower %}
-                    <a href="{{ url_for('guestedit_message', depart=message.dept_name, user=message.username, message_id=message._id) }}"
-                        class="btn-small blueBack-sea">
-                        Edit <i class="fas fa-pen-fancy"></i></a>
-                    <button data-target="modal{{ loop.index }}" class=" right blueBack-sea btn modal-trigger">Delete</button>
-                    <!-- Modal Structure -->
-                    <div id="modal{{ loop.index }}" class="modal">
-                        <div class="modal-content">
-                            <h3 class="center-align crimson"><strong>Are you sure you want to delete this message?</strong></h3>
-                        </div>
-                        <div class="modal-footer">
-                            <a href="{{ url_for('guestdelete_message', depart=message.dept_name, user=message.username, message_id=message._id) }}"
-                                class="pad-50 modal-close left btn-small blueBack-sea">OK</a>
-                            <a href="#" class="pad-50 modal-close btn-small blueBack-sea">No</a>
-                        </div>
-                    </div>
-                    {% endif %}
                 </div>
             </li>
         </ul>

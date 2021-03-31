@@ -33,11 +33,21 @@
     </div>
 
         <div class="col s10">
+            <div class="row">
+            <div class="col s12">
+                <h3 class="center-align offwhite">DISPLAY ONLY</h3>
+                <div class="center-align ">
+                <a href="{{ url_for('user_home', username=session['user']) }}"
+                    class="btn-small text-shadow">
+                <strong>Guest Return </strong></a>
+                </div>
+            </div>
+        </div>
+
             <p class=" center-align antiquewhite">Please click the Check Image button before submiting.</p>
             <!--add image form-->
             <div class="row top-2">
-                <form id="image_form" class="card-panel matt-black offwhite col s12 m10 offset-m1" method="POST"
-                    action="{{ url_for('add_image') }}">
+                <div class="card-panel matt-black offwhite col s12 m10 offset-m1">
                     <!--enter image_name-->
                     <div class="row">
                         <div class="input-field col s12 m10 offset-m1">
@@ -68,7 +78,7 @@
                     <!--Check Image-->
                     <div class="row">
                         <div class="center-align">
-                            <div onclick="check_image()" class="pad-20 btn-small white-text blueBack-sea">
+                            <div class="pad-20 btn-small white-text blueBack-sea">
                                <strong>Check Image</strong>
                             </div>
                         </div>
@@ -77,12 +87,12 @@
                     <!--submit-->
                     <div class="row">
                         <div class="center-align">
-                            <button type="submit" class="pad-30 btn-small white-text blueBack-sea">
-                                <strong>Add Image</strong>
-                            </button>
+                            <a href="{{ url_for('user_home', username=session['user']) }}"
+                                class="pad-30 btn-small white-text blueBack-sea">
+                            <strong>Add Image </strong></a>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
 
             <!--instructions-->
