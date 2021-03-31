@@ -426,70 +426,6 @@ def add_message():
 
 
 @app.route(
-    "/guestedit_message/<message_id>/<depart>/<user>", methods=["GET", "POST"])
-def guestedit_message(message_id, depart, user):
-    """Render the Edit Message page.
-
-    On Get checks if the message poster's username is equal to the sesson user
-    or if admin is user and if either is true renders the Edit Message page
-    with the selected message's detail as values in the input boxes.
-
-    :param message_id: the selected document to be edited
-    :type dep: str
-    :param depart: the collection which the document is in
-    :type dep: str
-    :param user: the user's username
-    :type dep: str
-    :return: edit_message.html
-    :rtype: n/a
-    """
-
-    if session["user"] == user:
-        if request.method == "POST":
-            # get data from form
-            mes_is_priority = "on" if request.form.get(
-                "is_priority") else "off"
-            # get date from datetime
-            day = datetime.datetime.now()
-            mes_date = day.strftime("%d %B, %Y")
-            mes_dept = request.form.get("department_name")
-            # get data from users collection in Mongo
-            user = mongo.db.users.find_one({"username": session["user"]})
-            username = session["user"]
-            first = user["firstname"]
-            last = user["lastname"]
-            mes_poster = f"{first} {last}"
-            mes_job = user["job_title"]
-            # create dictionary
-            edit = {
-                "is_priority": mes_is_priority,
-                "dept_name": mes_dept,
-                "date": mes_date,
-                "poster": mes_poster,
-                "username": username,
-                "job_title": mes_job,
-                # get date from form
-                "subject": request.form.get("subject"),
-                "message": request.form.get("message"),
-                "image_src": request.form.get("image_src"),
-                "image_name": request.form.get("image_name"),
-            }
-            # update document in selected department collection in Mongo
-            mongo.db[mes_dept].update({"_id": ObjectId(message_id)}, edit)
-            flash("Message Updated")
-            # Render the Department page
-            return redirect(url_for("get_dep", dep=mes_dept))
-
-        # get selected document in selected department collection in Mongo
-        message = mongo.db[depart].find_one({"_id": ObjectId(message_id)})
-        # get depts collection data from Mongo
-        depts = mongo.db.depts.find().sort("dept_name", 1)
-        # Render the Edit message page
-        return render_template(
-            "edit_message.html", message=message, depts=depts)
-
-
-@app.route(
     "/edit_message/<message_id>/<depart>/<user>", methods=["GET", "POST"])
 def edit_message(message_id, depart, user):
     """Render the Edit Message page.
@@ -555,21 +491,6 @@ def edit_message(message_id, depart, user):
             "edit_message.html", message=message, depts=depts)
 
 
-@app.route("/guestedit_image")
-def guestedit_image():
-    """Guest admin render the Edit Image page.
-
-    On Get checks if admin is sesson user then renders the Edit Image page
-
-    :return: edit_image.html
-    :rtype: n/a
-    """
-
-    if session["user"] == "admin":
-        # Render the Edit Images page
-        return render_template("edit_image.html")
-
-
 @app.route("/edit_image/<image_id>", methods=["GET", "POST"])
 def edit_image(image_id):
     """Render the Edit Image page and allow admin to edit an image.
@@ -604,43 +525,16 @@ def edit_image(image_id):
         return render_template("edit_image.html", image=image)
 
 
-@app.route("/guestdelete_message/<message_id>/<depart>/<user>")
-def guestdelete_message(message_id, depart, user):
-    """Guest admin delete a Message.
-
-    Checks if the message poster's username is equal to the sesson user
-    or if admin is user and if either is true displays a model asking
-    the user to confirm delete.
-    If the user confirms a message is displays.
-
-    :param message_id: the selected document to be edited
-    :type dep: str
-    :param depart: the collection which the document is in
-    :type dep: str
-    :param user: the user's username
-    :type dep: str
-    :return: edit_message.html
-    :rtype: n/a
-    """
-
-    if session["user"] == user:
-        # remove selected document from selected department collection in Mongo
-        mongo.db[depart].remove({"_id": ObjectId(message_id)})
-        flash("Message Deleted")
-        # Render the Department page
-        return redirect(url_for("get_dep", dep=depart))
-
-
 @app.route("/delete_message/<message_id>/<depart>/<user>")
 def delete_message(message_id, depart, user):
     """Delete a Message.
 
     Checks if the message poster's username is equal to the sesson user
-    or if admin is user and if either is true displays a model asking
+    or if admin2 is user and if either is true displays a model asking
     the user to confirm delete.
     If the user confirms the document is deleted in Mongo.
 
-    :param message_id: the selected document to be edited
+    :param message_id: the selected document to be deleted
     :type dep: str
     :param depart: the collection which the document is in
     :type dep: str
@@ -827,24 +721,7 @@ def remove_user():
             return redirect(url_for("user_home", username=session["user"]))
 
         # Render the Remove User page
-        return render_template("remove_user.html")
-
-
-@app.route("/guestdelete_image")
-def guestdelete_image():
-    """ Guest admin delete an image.
-
-    On Get checks if admin is user and if true displays a modal asking the
-    user to confirm delete.
-    On confirming the user is returned to image page
-
-    :return: images.html
-    :rtype: n/a
-    """
-
-    if session["user"] == "admin":
-        # render Images page
-        return redirect(url_for("get_image"))
+        return render_template("realremove_user.html")
 
 
 @app.route("/delete_image/<image_id>")
