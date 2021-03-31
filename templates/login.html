@@ -63,9 +63,16 @@
             <div class="panel-left"></div>
         </div>
         <div class="col s10">
-            <p class="margintop-20 center-align offwhite">Guest login Username "clift" Password "clift"</p>
+            <div class="row">
+                <div class="col s12 m8 offset-m2 top-box margintop-20">
+                    <p class="center-align offwhite">GUEST LOGIN - Username "clift", Password "clift"
+                         <br> GUEST ADMIN LOGIN - Username "admin", Password "admin"<br>
+                         <br>Admin features in display mode only
+                    </p>
+                </div>
+            </div>
             <!--login-->
-            <div class="row margintop-100">
+            <div class="row margintop-20">
                 <div class="col s12 m6 offset-m3">
                     <h5 class="margintop-20 center-align offwhite">Log In</h5>
                     <form method="POST" action="{{ url_for('login') }}">

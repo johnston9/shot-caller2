@@ -2,6 +2,8 @@
 
 [View the project live here.](https://ms3-shot-caller.herokuapp.com/)
 
+THIS IS THE DISPLAY VERSION OF THE APP. VIEW THE ORIGINAL REPO [HERE](https://github.com/johnston9/MS3-Shot-Caller)
+
 A web application for film production that provides a comprehensive
 means of production collaboration from pre-production to post-production. The app is designed 
 to provide a simple streamlined means of communication through nine different 
